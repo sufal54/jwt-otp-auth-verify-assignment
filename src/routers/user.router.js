@@ -107,7 +107,7 @@ router.get("/profile", authMiddle, async (req, res) => {
     }
 
     try {
-        const userData = await userModel.findOne({ _id: req.user.user });
+        const userData = await userModel.findOne({ _id: req.user.user }).select("name email phone");
         if (!userData) {
             return res.status(401).json({ success: false, message: "Unauthrized token" });
         }
